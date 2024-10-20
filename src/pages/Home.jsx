@@ -3,7 +3,7 @@ import React from 'react'
 function Home() {
   return (
     <div className="flex flex-col items-center gap-10 text-[#dbd8e3] mt-28 mb-10">
-      <h1 className="text-[2.5rem] font-extrabold mb-14">Bienvenue sur le site EzTask TEST WORKFLOW</h1>
+      <h1 className="text-[2.5rem] font-extrabold mb-14">Bienvenue sur le site EzTask TEST WORKFLOW 2</h1>
         <div className="flex gap-28 mt-28">
           <section className="w-[40vw]  p-9 border-[#dbd8e3] border-[1px] rounded-3xl shadow-md shadow-black font-semibold backdrop-blur-lg flex flex-col items-center justify-center gap-10">
             <h2 className="font-extrabold text-[1.8rem] p-5">Simplicité d’utilisation</h2>
