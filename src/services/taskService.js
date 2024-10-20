@@ -1,6 +1,6 @@
 export const getAllTasks = async (id) => {
     try {
-        const response = await fetch(`http://91.134.90.159/api/task/${id}`, {
+        const response = await fetch(`http://api.ez-task.fr/api/task/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ export const getAllTasks = async (id) => {
 
 export const createTask = async (content, id) => {
     try {
-        const response = await fetch('http://91.134.90.159/api/task/add', {
+        const response = await fetch('http://api.ez-task.fr/api/task/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export const createTask = async (content, id) => {
 
 export const updateTask = async (id, content) => {
     try {
-        const response = await fetch('http://91.134.90.159/api/task/update', {
+        const response = await fetch('http://api.ez-task.fr/api/task/update', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export const updateTask = async (id, content) => {
 
 export const deleteTask = async (id) => {
     try {
-        const response = await fetch('http://91.134.90.159/api/task/delete', {
+        const response = await fetch('http://api.ez-task.fr/api/task/delete', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
