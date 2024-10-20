@@ -3,7 +3,7 @@
 export const fetchsign = async (values, csrf) => {
     const { email, password, name, firstName } = values;
     try {
-        const response = await fetch('http://localhost:8080/api/users/sign', {
+        const response = await fetch('http://91.134.90.159/api/users/sign', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -25,8 +25,10 @@ export const fetchsign = async (values, csrf) => {
 
 export const fetchLogin = async (values, csrf, dispatch, setJwt) => {
     const { email, password } = values;
+    console.log(csrf);
+    
     try {
-        const response = await fetch('http://localhost:8080/api/users/login', {
+        const response = await fetch('http://91.134.90.159/api/users/login', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -55,7 +57,7 @@ export const fetchLogin = async (values, csrf, dispatch, setJwt) => {
 
 export const getCsrf = async () => {
     try {
-        const response = await fetch('http://localhost:8080/csrfToken', {
+        const response = await fetch('http://91.134.90.159/api/csrfToken', {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'
@@ -75,7 +77,7 @@ export const getCsrf = async () => {
 }
 
 export const getUser = async (jwt, dispatch) => {
-    const response = await fetch('http://localhost:8080/api/users/user', {
+    const response = await fetch('http://91.134.90.159/api/users/user', {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -90,10 +92,10 @@ export const getUser = async (jwt, dispatch) => {
         payload: { family: data.family, familyId: data.familyId, hash: data.hash, isOwner: data.isOwner }
     })
     return data
-}
+};
 
 export const getAllUsers = async (jwt, id) => {
-    const response = await fetch(`http://localhost:8080/api/users/${id}`, {
+    const response = await fetch(`http://91.134.90.159/api/users/${id}`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',

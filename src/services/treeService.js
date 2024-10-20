@@ -1,6 +1,6 @@
 export const getAllTrees = async (familyId) => {
     try {
-        const response = await fetch(`http://localhost:8080/api/tree/all/${familyId}`, {
+        const response = await fetch(`http://91.134.90.159/api/tree/all/${familyId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ export const getAllTrees = async (familyId) => {
 
 export const getTree = async (id) => {
     try {
-        const response = await fetch(`http://localhost:8080/api/tree/one/${id}`, {
+        const response = await fetch(`http://91.134.90.159/api/tree/one/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ export const getTree = async (id) => {
 
 export const createTree = async (name, familyId) => {
     try {
-        const response = await fetch('http://localhost:8080/api/tree/add', {
+        const response = await fetch('http://91.134.90.159/api/tree/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export const createTree = async (name, familyId) => {
 
 export const deleteTree = async (id) => {
     try {
-        const response = await fetch(`http://localhost:8080/api/tree/delete/${id}`, {
+        const response = await fetch(`http://91.134.90.159/api/tree/delete/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ export const deleteTree = async (id) => {
 
 export const updateTree = async (id, name) => {
     try {
-        const response = await fetch('http://localhost:8080/api/tree/update', {
+        const response = await fetch('http://91.134.90.159/api/tree/update', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

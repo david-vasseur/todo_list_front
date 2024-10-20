@@ -67,7 +67,7 @@ const UserProvider = ({ children }) => {
     console.log(state);
     useEffect(() => {
         if (state.isConnected) {
-            const newSocket = io('http://localhost:8080', {
+            const newSocket = io('http://91.134.90.159/', {
                 query: {
                     userId: state.id,
                     userFirstName: state.firstName,

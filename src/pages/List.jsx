@@ -21,7 +21,7 @@ function List() {
     const [updateValue, setUpdateValue] = useState('');
     console.log(tasks);
     
-    const socket = io('http://localhost:8080');
+    const socket = io('http://91.134.90.159/');
 
     useEffect(() => {
         const fetchList = async () => {
