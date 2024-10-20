@@ -3,7 +3,7 @@
 export const fetchsign = async (values, csrf) => {
     const { email, password, name, firstName } = values;
     try {
-        const response = await fetch('http://api.ez-task.fr/api//users/sign', {
+        const response = await fetch('http://api.ez-task.fr/api/users/sign', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ export const getUser = async (jwt, dispatch) => {
 };
 
 export const getAllUsers = async (jwt, id) => {
-    const response = await fetch(`http://api.ez-task.fr/api//users/${id}`, {
+    const response = await fetch(`http://api.ez-task.fr/api/users/${id}`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
