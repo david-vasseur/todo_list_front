@@ -54,7 +54,7 @@ function Todo() {
           <h2 className="text-[2.5rem] font-extrabold text-[#dbd8e3] text-center">Famille {state.family}</h2>
           <div className="flex gap-5 relative">
               {!add && (
-                <div className="absolute -translate-x-[60%] transition-all duration-300">
+                <div className="absolute scale-[0.8] sm:scale-[1] -translate-x-[60%] transition-all duration-300">
                   <TodoInput familyId={state.familyId} addList={addList} />
                 </div>
               )}
