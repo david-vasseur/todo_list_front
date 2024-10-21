@@ -51,7 +51,7 @@ function Todo() {
   return (
     <div className="mt-28">
         <div className="flex flex-col items-center gap-5">
-          <h2 className="text-[2.5rem] font-extrabold text-[#dbd8e3]">Les listes de la famille {state.family}</h2>
+          <h2 className="text-[2.5rem] font-extrabold text-[#dbd8e3] text-center">Famille {state.family}</h2>
           <div className="flex gap-5 relative">
               {!add && (
                 <div className="absolute -translate-x-[60%] transition-all duration-300">
