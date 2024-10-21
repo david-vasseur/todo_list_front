@@ -59,7 +59,7 @@ function Todo() {
                 </div>
               )}
               <FaPlusCircle 
-                className={`text-[#3e065f] rounded-full text-[3rem] transition ease duration-300 absolute right-0 sm:translate-x-[400%] hover:cursor-pointer ${!add ? "rotate-45 bg-[red]" : "bg-[green]"}`} 
+                className={`text-[#3e065f] rounded-full text-[3rem] transition ease duration-300 absolute translate-x-[300%] sm:translate-x-[400%] hover:cursor-pointer ${!add ? "rotate-45 bg-[red]" : "bg-[green]"}`} 
                 onClick={() => { setAdd(!add) }} 
               />
             </div>
