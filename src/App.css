@@ -39,7 +39,5 @@
 
 body {
   /* background-color: #3e065f; */
-  background-image: url(../public/images/bg.jpg);
-  background-size: cover;
-  background-attachment: fixed;
+  
 }

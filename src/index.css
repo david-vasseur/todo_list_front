@@ -10,6 +10,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("images/bg.jpg");
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 code {
