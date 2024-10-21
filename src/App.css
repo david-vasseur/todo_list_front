@@ -37,7 +37,24 @@
   }
 }
 
-body {
-  /* background-color: #3e065f; */
-  
+.background-container {
+  background-image: url('images/bg.jpg'); /* Chemin vers l'image */
+  background-size: cover; /* Couvre tout l'espace */
+  background-position: center; /* Centre l'image */
+  position: fixed; /* Fixe le conteneur en arrière-plan */
+  top: 0; /* Positionne en haut */
+  left: 0; /* Positionne à gauche */
+  right: 0; /* Positionne à droite */
+  bottom: 0; /* Positionne en bas */
+  z-index: -1; /* Envoie le conteneur derrière le contenu */
+  height: 100vh;
 }
+
+.app-content {
+  overflow: auto;
+  height: 100vh;
+  position: relative; /* Assure que le contenu est en position relative */
+  z-index: 1; /* Le contenu sera au-dessus du fond */
+  /* Autres styles pour ton application */
+}
+
