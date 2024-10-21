@@ -68,7 +68,7 @@ function Card({ item, onDelete, onUpdate, isModified, setIsModified, updateValue
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
-            setUpdateValue(item.name);
+            setUpdateValue(item.name || item.content);
             setIsModified(isModified === item.id ? null : item.id);
           }}
         >
