@@ -63,7 +63,7 @@ function Todo() {
                 onClick={() => { setAdd(!add) }} 
               />
             </div>
-          <div className="flex flex-col gap-10 mt-20 justify-center items-center">
+          <div className="flex flex-col gap-10 mt-20 mb-20 justify-center items-center">
             {lists.length > 0 ? lists.map(list => (
               <Card key={list.id} item={list} onDelete={handleDelete} onUpdate={handleUpdate} isModified={isModified} setIsModified={setIsModified} updateValue={updateValue} setUpdateValue={setUpdateValue} />
             ))

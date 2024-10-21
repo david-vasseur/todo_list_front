@@ -8,7 +8,7 @@ function Sign() {
   const [isRegister, setIsRegister] = useState(true);
 
   return (
-    <div className="flex flex-col gap-5 items-center mt-28">
+    <div className="flex flex-col gap-5 items-center mt-28 mb-20">
       <div className="flex"> 
       {!isRegister && (
           <BackButton onClick={() => {setIsRegister(!isRegister)}}/> 

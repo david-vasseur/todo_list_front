@@ -89,7 +89,7 @@ function List() {
                 onClick={() => { setAdd(!add) }} 
               />
             </div>
-            <div className="flex flex-col gap-5 mt-20">
+            <div className="flex flex-col gap-5 mt-20 mb-20">
                 {tasks.map(task => (
                 <Card key={task.id} item={task} setIsModified={setIsModified} isModified={isModified} onDelete={handleDelete} onUpdate={handleUpdate} updateValue={updateValue} setUpdateValue={setUpdateValue} />
                 ))}
