@@ -10,7 +10,9 @@ import NavBar from './components/NavBar';
 
 function App() {
   return (
-    <Router>
+    <div className="background-container">
+      <div className="app-content">
+      <Router>
       <NavBar />
       <Modal />
       <Routes>
@@ -22,6 +24,9 @@ function App() {
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
+      </div>
+    </div>
+    
   );
 }
 

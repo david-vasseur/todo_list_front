@@ -48,7 +48,7 @@ function SignForm({ setIsRegister }) {
     }
 
   return (
-    <div className="mt-20">
+    <div className="m-20">
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
             <Form className="flex flex-col items-center gap-8">
                 <div className="flex flex-col w-52">
