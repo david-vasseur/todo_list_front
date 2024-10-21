@@ -60,7 +60,7 @@ function List() {
 
     const handleDelete = async (id) => {
         const deletedTask = await deleteTask(id);
-        showModal('BRAVO', deletedTask.message);
+        showModal('', deletedTask.message);
       };
     
       const handleUpdate = async (id, content) => {
@@ -68,7 +68,7 @@ function List() {
         
         const updatedTask = await updateTask(id, content);
         setTasks(prev => prev.map(task => (task.id === id ? { ...task, content: updateValue } : task)));
-        showModal('BRAVO', updatedTask.message);
+        showModal('', updatedTask.message);
       };
 
   return (
