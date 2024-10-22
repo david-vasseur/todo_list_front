@@ -31,7 +31,7 @@ export const fetchLogin = async (values, csrf, dispatch) => {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-Tokennnnnnnn': csrf
+                'X-CSRF-Token': csrf
             },
             credentials: "include",
             body: JSON.stringify({ email, password })
