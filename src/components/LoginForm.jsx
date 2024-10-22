@@ -42,11 +42,15 @@ function LoginForm() {
         console.log(loginData);
         console.log(loginData.success);
         
-        if(!loginData.success) {
+        if (!loginData.success) {
+            console.log("erreur");
+            
             showModal(<TfiAlert className="text-[red] text-[3rem]" />, loginData.error.message)
         }
         else {
-            showModal(<FaSmile className="text-[#dbc049] text-[3rem]" />, `Bienvenue ${loginData.user.firstName}`)
+            console.log("success");
+            
+            showModal(<FaSmile className="text-[#dbc049] text-[3rem]" />, `Bienvenue ${loginData.data.user.firstName}`)
             await getUser(csrf, dispatch);  
             navigate('/profile');
         }    
