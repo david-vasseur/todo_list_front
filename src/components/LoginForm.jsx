@@ -15,7 +15,7 @@ import { FaSmile } from 'react-icons/fa';
 function LoginForm() {
     const { showModal } = useModal()
     const { dispatch } = useContext(UserContext);
-    const { setJwt, setCsrf } = useContext(SecurityContext);
+    const { setCsrf } = useContext(SecurityContext);
     const navigate = useNavigate()
 
     const initialValues = {
@@ -36,14 +36,13 @@ function LoginForm() {
     const handleSubmit = async (values) => {
         const csrf = await getCsrf();
         await setCsrf(csrf);        
-        const loginData = await fetchLogin(values, csrf, dispatch, setJwt);
-        const jwt = loginData.token;
-        if(!jwt) {
+        const loginData = await fetchLogin(values, csrf, dispatch);
+        if(!csrf) {
             showModal(<TfiAlert className="text-[red] text-[3rem]" />, loginData.error.message)
         }
         else {
             showModal(<FaSmile className="text-[#dbc049] text-[3rem]" />, `Bienvenue ${loginData.user.firstName}`)
-            await getUser(jwt, dispatch);  
+            await getUser(csrf, dispatch);  
             navigate('/profile');
         }    
     }

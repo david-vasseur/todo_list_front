@@ -23,9 +23,8 @@ export const fetchsign = async (values, csrf) => {
     }
 };
 
-export const fetchLogin = async (values, csrf, dispatch, setJwt) => {
+export const fetchLogin = async (values, csrf, dispatch) => {
     const { email, password } = values;
-    console.log(csrf);
     
     try {
         const response = await fetch('http://api.ez-task.fr/api/users/login', {
@@ -42,8 +41,6 @@ export const fetchLogin = async (values, csrf, dispatch, setJwt) => {
             throw new Error(errorData.message)
         }
         const data = await response.json();
-        console.log(data.user);
-        await setJwt(data.token)
         dispatch({
             type: 'add user',
             payload: data.user
@@ -76,12 +73,12 @@ export const getCsrf = async () => {
     } 
 }
 
-export const getUser = async (jwt, dispatch) => {
+export const getUser = async (csrf, dispatch) => {
     const response = await fetch('http://api.ez-task.fr/api/users/user', {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${jwt}`
+            'X-CSRF-Token': csrf
         },
         credentials: "include",
     });
@@ -94,12 +91,12 @@ export const getUser = async (jwt, dispatch) => {
     return data
 };
 
-export const getAllUsers = async (jwt, id) => {
+export const getAllUsers = async (csrf, id) => {
     const response = await fetch(`http://api.ez-task.fr/api/users/${id}`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${jwt}`
+            'X-CSRF-Token': csrf
         },
         credentials: "include",
     });
