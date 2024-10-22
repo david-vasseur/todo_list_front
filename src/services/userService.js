@@ -45,7 +45,10 @@ export const fetchLogin = async (values, csrf, dispatch) => {
             type: 'add user',
             payload: data.user
         })
-        return data;
+        return {
+            success: response.ok,
+            data
+        };
     } catch (error) {
         console.error(error.message);
         return { error: { message: error.message } };
