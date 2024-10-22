@@ -106,3 +106,16 @@ export const getAllUsers = async (csrf, id) => {
     const data = await response.json();
     return data;
 };
+
+export const fetchLogout = async () => {
+    const response = await fetch(`http://api.ez-task.fr/api/users/logout`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrf
+        },
+        credentials: "include",
+    });
+    const data = await response.json();
+    return data;
+}

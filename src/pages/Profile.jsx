@@ -3,7 +3,7 @@ import { UserContext } from '../context/UserContext'
 import { useNavigate } from 'react-router-dom';
 import { useModal } from '../context/ModalContext';
 import { useState } from 'react';
-import { getAllUsers } from '../services/userService';
+import { fetchLogout, getAllUsers } from '../services/userService';
 import { SecurityContext } from '../context/SecurityContext';
 import { createFamily } from '../services/familyService';
 import { TfiExport } from 'react-icons/tfi';
@@ -22,8 +22,9 @@ function Profile() {
   const [inputValue, setInputValue] = useState('');
   console.log(users);
   const navigate = useNavigate();
-  const handleDisconnect = (dispatch) => {
-    showModal('Au revoir', state.firstName)
+  const handleDisconnect = async (dispatch) => {
+    const response = await fetchLogout();
+    showModal(response.message, state.firstName)
     dispatch({ type: 'remove user' });
     navigate('/');
   }
