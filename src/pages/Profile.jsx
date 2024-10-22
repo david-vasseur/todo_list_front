@@ -7,11 +7,10 @@ import { fetchLogout, getAllUsers } from '../services/userService';
 import { SecurityContext } from '../context/SecurityContext';
 import { createFamily } from '../services/familyService';
 import { TfiExport } from 'react-icons/tfi';
-import { queryByTestId } from '@testing-library/react';
 
 function Profile() {
   const { state, dispatch } = useContext(UserContext);
-  const { jwt } = useContext(SecurityContext); 
+  const { jwt, csrf } = useContext(SecurityContext); 
   console.log(state);
   
   const { showModal } = useModal();
@@ -21,8 +20,10 @@ function Profile() {
   const [add, setAdd] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const navigate = useNavigate();
+
+
   const handleDisconnect = async (dispatch) => {
-    const response = await fetchLogout();
+    const response = await fetchLogout(csrf);
     console.log(response.message);    
     showModal(response.message, state.firstName);
     dispatch({ type: 'remove user' });
