@@ -39,7 +39,7 @@ function LoginForm() {
         const loginData = await fetchLogin(values, csrf, dispatch);
         
         if (!loginData.success) {
-            showModal(<TfiAlert className="text-[red] text-[3rem]" />, loginData.error.message)
+            showModal(<TfiAlert className="text-[red] text-[3rem]" />, loginData.error.message);
         }
         else {
             showModal(<FaSmile className="text-[#dbc049] text-[3rem]" />, `Bienvenue ${loginData.data.user.firstName}`);
