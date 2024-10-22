@@ -30,7 +30,7 @@ export const fetchLogin = async (values, csrf, dispatch) => {
         const response = await fetch('http://api.ez-task.fr/api/users/login', {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             credentials: "include",
             body: JSON.stringify({ email, password })
