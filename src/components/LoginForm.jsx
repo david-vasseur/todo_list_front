@@ -35,28 +35,20 @@ function LoginForm() {
 
     const handleSubmit = async (values) => {
         const csrf = await getCsrf();
-        console.log(csrf);
-        
         await setCsrf(csrf);        
         const loginData = await fetchLogin(values, csrf, dispatch);
-        console.log(loginData);
-        console.log(loginData.success);
         
         if (!loginData.success) {
-            console.log("erreur");
-            
             showModal(<TfiAlert className="text-[red] text-[3rem]" />, loginData.error.message)
         }
         else {
-            console.log("success");
-            
-            showModal(<FaSmile className="text-[#dbc049] text-[3rem]" />, `Bienvenue ${loginData.data.user.firstName}`)
-            console.log('test du csrf avant envoie', csrf);
-            
-            await getUser(csrf, dispatch);  
+            showModal(<FaSmile className="text-[#dbc049] text-[3rem]" />, `Bienvenue ${loginData.data.user.firstName}`);
+            const newCsrf = loginData.data.csrfToken;
+            await setCsrf(newCsrf);
+            await getUser(newCsrf, dispatch);  
             navigate('/profile');
         }    
-    }
+    };
 
   return (
     <div className="mt-20">
