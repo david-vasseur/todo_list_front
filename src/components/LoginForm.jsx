@@ -35,9 +35,11 @@ function LoginForm() {
 
     const handleSubmit = async (values) => {
         const csrf = await getCsrf();
+        console.log(csrf);
+        
         await setCsrf(csrf);        
         const loginData = await fetchLogin(values, csrf, dispatch);
-        if(!csrf) {
+        if(!loginData.success) {
             showModal(<TfiAlert className="text-[red] text-[3rem]" />, loginData.error.message)
         }
         else {
