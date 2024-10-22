@@ -35,6 +35,8 @@ function LoginForm() {
 
     const handleSubmit = async (values) => {
         const csrf = await getCsrf();
+        console.log('Premier token csrf:', csrf);
+        
         await setCsrf(csrf);        
         const loginData = await fetchLogin(values, csrf, dispatch);
         
@@ -44,6 +46,8 @@ function LoginForm() {
         else {
             showModal(<FaSmile className="text-[#dbc049] text-[3rem]" />, `Bienvenue ${loginData.data.user.firstName}`);
             const newCsrf = loginData.data.csrfToken;
+            console.log('deuxieme token csrf:', newCsrf);
+            
             await setCsrf(newCsrf);
             await getUser(newCsrf, dispatch);  
             navigate('/profile');
