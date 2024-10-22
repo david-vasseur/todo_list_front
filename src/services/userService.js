@@ -31,7 +31,6 @@ export const fetchLogin = async (values, csrf, dispatch) => {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-Token': csrf
             },
             credentials: "include",
             body: JSON.stringify({ email, password })
@@ -80,7 +79,8 @@ export const getUser = async (csrf, dispatch) => {
     const response = await fetch('http://api.ez-task.fr/api/users/user', {
         method: "GET",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrf
         },
         credentials: "include",
     });
