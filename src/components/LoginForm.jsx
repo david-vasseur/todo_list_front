@@ -51,6 +51,8 @@ function LoginForm() {
             console.log("success");
             
             showModal(<FaSmile className="text-[#dbc049] text-[3rem]" />, `Bienvenue ${loginData.data.user.firstName}`)
+            console.log('test du csrf avant envoie', csrf);
+            
             await getUser(csrf, dispatch);  
             navigate('/profile');
         }    
