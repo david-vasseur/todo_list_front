@@ -81,7 +81,7 @@ export const getUser = async (csrf, dispatch) => {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
-            'X-Csrf-Token': csrf
+            'X-CSRF-Token': csrf
         },
         credentials: "include",
     });
