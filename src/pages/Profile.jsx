@@ -20,11 +20,11 @@ function Profile() {
   const [create, setCreate] = useState(false);
   const [add, setAdd] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  console.log(users);
   const navigate = useNavigate();
   const handleDisconnect = async (dispatch) => {
     const response = await fetchLogout();
-    showModal(response.message, state.firstName)
+    console.log(response.message);    
+    showModal(response.message, state.firstName);
     dispatch({ type: 'remove user' });
     navigate('/');
   }
