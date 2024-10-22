@@ -25,7 +25,7 @@ function Profile() {
   const handleDisconnect = async (dispatch) => {
     const response = await fetchLogout(csrf);
     console.log(response.message);    
-    showModal(response.message, state.firstName);
+    showModal(response.message, `A bientot ${state.firstName}`);
     dispatch({ type: 'remove user' });
     navigate('/');
   }
