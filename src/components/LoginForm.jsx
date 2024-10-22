@@ -39,7 +39,7 @@ function LoginForm() {
         
         await setCsrf(csrf);        
         const loginData = await fetchLogin(values, csrf, dispatch);
-        console.log(loginData);
+        console.log(loginData.success);
         
         if(!loginData.success) {
             showModal(<TfiAlert className="text-[red] text-[3rem]" />, loginData.error.message)
