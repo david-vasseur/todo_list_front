@@ -59,10 +59,7 @@ export const getCsrf = async () => {
     try {
         const response = await fetch('https://api.ez-task.fr/api/csrfToken', {
             method: "GET",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials:"include"
+            credentials: "include"
         });
         if(!response.ok) {
             const errorData = await response.json()
