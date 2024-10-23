@@ -1,86 +1,62 @@
-import React, { useContext, useEffect, useState } from 'react'
-import TodoInput from '../components/TodoInput'
-import { getTree } from '../services/treeService'
-import { useParams } from 'react-router-dom'
-import { deleteTask, getAllTasks, updateTask } from '../services/taskService'
-import Card from '../components/Card'
-import { useModal } from '../context/ModalContext'
-import { FaPlusCircle } from 'react-icons/fa'
-import io from 'socket.io-client';
-import BackButton from '../components/BackButton'
-import { SecurityContext } from '../context/SecurityContext'
+import React, { useContext, useEffect, useState } from 'react';
+import { deleteTree, getAllTrees, updateTree } from '../services/treeService'
+import { UserContext } from '../context/UserContext';
+import { useModal } from '../context/ModalContext';
+import Card from '../components/Card';
+import TodoInput from '../components/TodoInput';
+import { FaPlusCircle } from 'react-icons/fa';
+import { SecurityContext } from '../context/SecurityContext';
 
-function List() {
+function Todo() {
 
-    const { csrf } = useContext(SecurityContext);
-    const { showModal } = useModal();
-    const params = useParams();
-    const { id } = params;
-    const [add, setAdd] = useState(true);
-    const [list, setList] = useState([]);
-    const [tasks, setTasks] = useState([]);
-    const [isModified, setIsModified] = useState(null); 
-    const [updateValue, setUpdateValue] = useState('');
-    
-    const socket = io('http://api.ez-task.fr/');
-
-    useEffect(() => {
-        const fetchList = async () => {
-            const fetchedList = await getTree(csrf, id);
-            setList(fetchedList);
-        }
-        const fetchTasks = async () => {
-            const fetchedTasks = await getAllTasks(csrf, id);
-            setTasks(fetchedTasks);
-        }
-        fetchList();
-        fetchTasks();
-    }, [id]);
-
-    useEffect(() => {
-      
-      socket.on('taskAdded', (newTask) => {
-        setTasks(prevTasks => [newTask, ...prevTasks]); 
-      });
-
-      socket.on('taskUpdated', (updatedTask) => {
-        setTasks(prev => prev.map(task => (task.id === updatedTask.id ? { ...task, content: updatedTask.content } : task)));
-      });
-
-      socket.on('taskDeleted', (deletedTask) => {
-        setTasks(prev => prev.filter(task => task.id !== deletedTask.id));
-      });
+  const { csrf } = useContext(SecurityContext);
+  const { showModal } = useModal();
+  const { state } = useContext(UserContext);
+  const [add, setAdd] = useState(true);
+  console.log(state);
+  const [lists, setLists] = useState([]);
+  const [isModified, setIsModified] = useState();  
+  const [updateValue, setUpdateValue] = useState('');
+  console.log(updateValue);
   
-      return () => {
-        socket.off('taskAdded');
-        socket.off('taskUpdated');
-        socket.off('taskDeleted');
-        socket.disconnect();
-      };
-    }, [socket]);
+  
+  
 
-    const handleDelete = async (id) => {
-        const deletedTask = await deleteTask(csrf, id);
-        showModal('', deletedTask.message);
-      };
-    
-      const handleUpdate = async (id, content) => {
-        const updatedTask = await updateTask(csrf, id, content);
-        setTasks(prev => prev.map(task => (task.id === id ? { ...task, content: updateValue } : task)));
-        showModal('', updatedTask.message);
-      };
+  useEffect(() => {
+    const fetchTrees = async () => {
+      const trees = await getAllTrees(csrf, state.familyId);
+      if (trees !== undefined) {
+        setLists(trees);
+      }    
+      
+    };
+    fetchTrees();
+  }, [state.familyId]);
+
+  const addList = (newList) => {
+    setLists(prev => [newList, ...prev]);
+  }
+
+  const handleDelete = async (id) => {
+    const deletedList = await deleteTree(csrf, id);
+    showModal('BRAVO', deletedList.message);
+    setLists(prev => prev.filter(list => list.id !== id));
+  };
+
+  const handleUpdate = async (id, name) => {
+    await updateTree(csrf, id, name);
+    setLists(prev => prev.map(list => (list.id === id ? { ...list, name: updateValue } : list)));
+    showModal('BRAVO', "La liste a été mis à jour.");
+  };
 
   return (
     <div className="mt-28">
-        <div className="flex gap-10 justify-between items-center w-[50vw] ml-5">
-            <BackButton />
-        </div>
-        <div className="flex flex-col gap-5 items-center">
-        <h2 className="text-[2.5rem] font-extrabold text-[#dbd8e3]">{list.name}</h2>
-            <div className="flex gap-5 relative">
+        <div className="flex flex-col items-center gap-5">
+          <h2 className="text-[2.5rem] font-extrabold text-[#dbd8e3] text-center">Famille {state.family}</h2>
+          <div className="flex gap-5 relative">
               {!add && (
-                <div className="absolute scale-[0.8] sm:scale-[1] -translate-x-[60%] sm:-translate-x-[60%] transition-all duration-300">
-                  <TodoInput id={id} />
+                <div className="absolute scale-[0.8] sm:scale-[1] -translate-x-[60%] transition-all duration-300">
+                  <TodoInput familyId={state.familyId} addList={addList} />
                 </div>
               )}
               <FaPlusCircle 
@@ -88,14 +64,18 @@ function List() {
                 onClick={() => { setAdd(!add) }} 
               />
             </div>
-            <div className="flex flex-col gap-5 mt-20 mb-20">
-                {tasks.map(task => (
-                <Card key={task.id} item={task} setIsModified={setIsModified} isModified={isModified} onDelete={handleDelete} onUpdate={handleUpdate} updateValue={updateValue} setUpdateValue={setUpdateValue} />
-                ))}
-            </div>
+          <div className="flex flex-col gap-10 mt-20 mb-20 justify-center items-center">
+            {lists.length > 0 ? lists.map(list => (
+              <Card key={list.id} item={list} onDelete={handleDelete} onUpdate={handleUpdate} isModified={isModified} setIsModified={setIsModified} updateValue={updateValue} setUpdateValue={setUpdateValue} />
+            ))
+              : (
+              <p>aucune liste n'a encore été créé.</p>
+              )
+            }
           </div>
+        </div>
     </div>
   )
 }
 
-export default List;
+export default Todo;
