@@ -1,14 +1,16 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React from 'react';
+import React, { useContext } from 'react';
 import * as Yup from 'yup';
 import { createTask } from '../services/taskService';
 import { FaCheck } from 'react-icons/fa6';
 import { createTree } from '../services/treeService';
 import { useModal } from '../context/ModalContext';
+import { SecurityContext } from '../context/SecurityContext';
 
 function TodoInput({ addList, addTask, id, familyId }) {
 
     const { showModal } = useModal();
+    const { csrf } = useContext(SecurityContext);
 
     const initialValues = {
         input: ""
@@ -21,13 +23,12 @@ function TodoInput({ addList, addTask, id, familyId }) {
     });
 
     const handleSubmit = async (values, { resetForm }) => {
-        console.log(values.input, id);
         if (id) {
-            const newTask = await createTask(values.input, id);
+            const newTask = await createTask(csrf, values.input, id);
             addTask(newTask.data);
             showModal('BRAVO', newTask.message)
         } else {
-            const newList = await createTree(values.input, familyId);
+            const newList = await createTree(csrf, values.input, familyId);
             addList(newList.data);
             showModal('BRAVO', newList.message)
         }

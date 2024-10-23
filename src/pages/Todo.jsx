@@ -5,12 +5,14 @@ import { useModal } from '../context/ModalContext';
 import Card from '../components/Card';
 import TodoInput from '../components/TodoInput';
 import { FaPlusCircle } from 'react-icons/fa';
+import { SecurityContext } from '../context/SecurityContext';
 
 function Todo() {
 
-  const { showModal } = useModal()
+  const { csrf } = useContext(SecurityContext);
+  const { showModal } = useModal();
   const { state } = useContext(UserContext);
-  const [add, setAdd] = useState(true)
+  const [add, setAdd] = useState(true);
   console.log(state);
   const [lists, setLists] = useState([]);
   const [isModified, setIsModified] = useState();  
@@ -22,8 +24,7 @@ function Todo() {
 
   useEffect(() => {
     const fetchTrees = async () => {
-      const trees = await getAllTrees(state.familyId);
-      console.log(trees);  
+      const trees = await getAllTrees(csrf, state.familyId);
       if (trees !== undefined) {
         setLists(trees);
       }    
@@ -37,13 +38,13 @@ function Todo() {
   }
 
   const handleDelete = async (id) => {
-    const deletedList = await deleteTree(id);
+    const deletedList = await deleteTree(csrf, id);
     showModal('BRAVO', deletedList.message);
     setLists(prev => prev.filter(list => list.id !== id));
   };
 
   const handleUpdate = async (id, name) => {
-    await updateTree(id, name);
+    await updateTree(csrf, id, name);
     setLists(prev => prev.map(list => (list.id === id ? { ...list, name: updateValue } : list)));
     showModal('BRAVO', "La liste a été mis à jour.");
   };

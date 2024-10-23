@@ -1,9 +1,10 @@
-export const getAllTrees = async (familyId) => {
+export const getAllTrees = async (csrf, familyId) => {
     try {
         const response = await fetch(`http://api.ez-task.fr/api/tree/all/${familyId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-Token': csrf
             },
             credentials: "include",
         });
@@ -14,12 +15,13 @@ export const getAllTrees = async (familyId) => {
     }
 };
 
-export const getTree = async (id) => {
+export const getTree = async (csrf, id) => {
     try {
         const response = await fetch(`http://api.ez-task.fr/api/tree/one/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-Token': csrf
             },
             credentials: "include",
         });
@@ -31,12 +33,13 @@ export const getTree = async (id) => {
     }
 };
 
-export const createTree = async (name, familyId) => {
+export const createTree = async (csrf, name, familyId) => {
     try {
         const response = await fetch('http://api.ez-task.fr/api/tree/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-Token': csrf
             },
             credentials: 'include',
             body: JSON.stringify({
@@ -51,12 +54,13 @@ export const createTree = async (name, familyId) => {
     }
 };
 
-export const deleteTree = async (id) => {
+export const deleteTree = async (csrf, id) => {
     try {
         const response = await fetch(`http://api.ez-task.fr/api/tree/delete/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-Token': csrf
             },
             credentials: 'include'
         });
@@ -67,12 +71,13 @@ export const deleteTree = async (id) => {
     }
 };
 
-export const updateTree = async (id, name) => {
+export const updateTree = async (csrf, id, name) => {
     try {
         const response = await fetch('http://api.ez-task.fr/api/tree/update', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-Token': csrf
             },
             credentials: 'include',
             body: JSON.stringify({

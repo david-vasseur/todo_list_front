@@ -10,9 +10,7 @@ import { TfiExport } from 'react-icons/tfi';
 
 function Profile() {
   const { state, dispatch } = useContext(UserContext);
-  const { jwt, csrf } = useContext(SecurityContext); 
-  console.log(state);
-  
+  const { jwt, csrf } = useContext(SecurityContext);   
   const { showModal } = useModal();
   const [seeUsers, setSeeUsers] = useState(false);
   const [users, setUsers] = useState([]);
@@ -23,20 +21,16 @@ function Profile() {
 
 
   const handleDisconnect = async (dispatch) => {
-    const response = await fetchLogout(csrf);
-    console.log(response.message);    
+    const response = await fetchLogout(csrf);  
     showModal(response.message, `A bientot ${state.firstName}`);
     dispatch({ type: 'remove user' });
     navigate('/');
   }
 
-  useEffect (() => {
-    console.log(state.familyId);
-    
+  useEffect (() => {    
     const fetchUsers = async () => {
       if (state.familyId && seeUsers) {
-        console.log('Fetching users for family ID:', state.familyId);
-        const users = await getAllUsers(jwt, state.familyId);
+        const users = await getAllUsers(csrf, state.familyId);
         setUsers(users.data)
       };    
     };
@@ -49,8 +43,7 @@ function Profile() {
   const handleSubmit = async (value) => {
     const id = state.id;
     const name = value;
-    const result = await createFamily(id, name);
-    console.log(result.message);
+    const result = await createFamily(csrf, id, name);
     if (result) {
       dispatch({ type: 'add family', payload: { family: value, familyId: result.data.id } })
     }

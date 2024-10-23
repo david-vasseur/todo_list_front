@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import TodoInput from '../components/TodoInput'
 import { getTree } from '../services/treeService'
 import { useParams } from 'react-router-dom'
@@ -8,10 +8,12 @@ import { useModal } from '../context/ModalContext'
 import { FaPlusCircle } from 'react-icons/fa'
 import io from 'socket.io-client';
 import BackButton from '../components/BackButton'
+import { SecurityContext } from '../context/SecurityContext'
 
 function List() {
 
-    const { showModal } = useModal()
+    const { csrf } = useContext(SecurityContext);
+    const { showModal } = useModal();
     const params = useParams();
     const { id } = params;
     const [add, setAdd] = useState(true);
@@ -19,17 +21,16 @@ function List() {
     const [tasks, setTasks] = useState([]);
     const [isModified, setIsModified] = useState(null); 
     const [updateValue, setUpdateValue] = useState('');
-    console.log(tasks);
     
-    const socket = io('http://91.134.90.159/');
+    const socket = io('http://api.ez-task.fr/');
 
     useEffect(() => {
         const fetchList = async () => {
-            const fetchedList = await getTree(id);
+            const fetchedList = await getTree(csrf, id);
             setList(fetchedList);
         }
         const fetchTasks = async () => {
-            const fetchedTasks = await getAllTasks(id);
+            const fetchedTasks = await getAllTasks(csrf, id);
             setTasks(fetchedTasks);
         }
         fetchList();
@@ -59,14 +60,14 @@ function List() {
     }, [socket]);
 
     const handleDelete = async (id) => {
-        const deletedTask = await deleteTask(id);
+        const deletedTask = await deleteTask(csrf, id);
         showModal('', deletedTask.message);
       };
     
       const handleUpdate = async (id, content) => {
         console.log({ id, content });
         
-        const updatedTask = await updateTask(id, content);
+        const updatedTask = await updateTask(csrf, id, content);
         setTasks(prev => prev.map(task => (task.id === id ? { ...task, content: updateValue } : task)));
         showModal('', updatedTask.message);
       };

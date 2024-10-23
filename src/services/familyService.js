@@ -1,9 +1,10 @@
-export const createFamily = async (id, name) => {
+export const createFamily = async (csrf, id, name) => {
     try {
         const response = await fetch('http://api.ez-task.fr/api/family/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-Token': csrf
             },
             credentials: "include",
             body: JSON.stringify({
