@@ -22,7 +22,7 @@ function TodoInput({ addList, addTask, id, familyId }) {
             .trim()
     });
 
-    const handleSubmit = async (values, { resetForm }) => {
+    const handleSubmit = async (values, { resetForm }, initialValues) => {
         if (id) {
             const newTask = await createTask(csrf, values.input, id);
             addTask(newTask.data);
@@ -44,9 +44,7 @@ function TodoInput({ addList, addTask, id, familyId }) {
                     <Field name="input" type="text" className="rounded-xl w-80 p-2" />
                     <ErrorMessage name="input" component="div" className="text-red-700 font-extrabold absolute" />
                 </div>
-
                 <button type="submit" className="z-10 pl-1 pr-1 bg-[#3e065f] text-[#dbd8e3] rounded-2xl hover:scale-[1.1] hover:text-[green] transition-[5]"><FaCheck className="text-[2rem] " /></button>
-
             </Form>
         </Formik>
     </div>

@@ -65,8 +65,6 @@ function List() {
       };
     
       const handleUpdate = async (id, content) => {
-        console.log({ id, content });
-        
         const updatedTask = await updateTask(csrf, id, content);
         setTasks(prev => prev.map(task => (task.id === id ? { ...task, content: updateValue } : task)));
         showModal('', updatedTask.message);
