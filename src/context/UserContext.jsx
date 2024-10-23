@@ -64,10 +64,9 @@ const reducer = (state, action) => {
 const UserProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const [socket, setSocket] = useState(null);
-    console.log(state);
     useEffect(() => {
         if (state.isConnected) {
-            const newSocket = io('http://91.134.90.159/', {
+            const newSocket = io('http://api.ez-task.fr/', {
                 query: {
                     userId: state.id,
                     userFirstName: state.firstName,
