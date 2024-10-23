@@ -19,7 +19,29 @@ function Todo() {
   const [updateValue, setUpdateValue] = useState('');
   console.log(updateValue);
   
-  
+  const socket = io('wss://api.ez-task.fr/');
+
+  useEffect(() => {
+      
+    socket.on('listAdded', (newList) => {
+      setTasks(prevLists => [newList, ...prevLists]); 
+    });
+
+    socket.on('listUpdated', (updatedList) => {
+      setTasks(prev => prev.map(list => (list.id === updatedList.id ? { ...list, name: updatedList.name } : list)));
+    });
+
+    socket.on('taskDeleted', (deletedList) => {
+      setTasks(prev => prev.filter(list => list.id !== deletedList.id));
+    });
+
+    return () => {
+      socket.off('listAdded');
+      socket.off('listUpdated');
+      socket.off('listDeleted');
+      socket.disconnect();
+    };
+  }, [socket]);
   
 
   useEffect(() => {
