@@ -32,7 +32,7 @@ function TodoInput({ addList, addTask, id, familyId }) {
             addList(newList.data);
             showModal('BRAVO', newList.message)
         }
-        resetForm();
+        resetForm({ values: initialValues });
     };
 
   return (
