@@ -66,7 +66,7 @@ const UserProvider = ({ children }) => {
     const [socket, setSocket] = useState(null);
     useEffect(() => {
         if (state.isConnected) {
-            const newSocket = io('http://api.ez-task.fr/', {
+            const newSocket = io('wss://api.ez-task.fr/', {
                 query: {
                     userId: state.id,
                     userFirstName: state.firstName,

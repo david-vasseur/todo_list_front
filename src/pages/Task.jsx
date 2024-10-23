@@ -22,7 +22,7 @@ function List() {
     const [isModified, setIsModified] = useState(null); 
     const [updateValue, setUpdateValue] = useState('');
     
-    const socket = io('http://api.ez-task.fr/');
+    const socket = io('wss://api.ez-task.fr/');
 
     useEffect(() => {
         const fetchList = async () => {
