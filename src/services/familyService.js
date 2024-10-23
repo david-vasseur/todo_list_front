@@ -1,6 +1,6 @@
 export const createFamily = async (csrf, id, name) => {
     try {
-        const response = await fetch('http://api.ez-task.fr/api/family/create', {
+        const response = await fetch('https://api.ez-task.fr/api/family/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

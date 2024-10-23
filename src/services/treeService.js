@@ -1,6 +1,6 @@
 export const getAllTrees = async (csrf, familyId) => {
     try {
-        const response = await fetch(`http://api.ez-task.fr/api/tree/all/${familyId}`, {
+        const response = await fetch(`https://api.ez-task.fr/api/tree/all/${familyId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ export const getAllTrees = async (csrf, familyId) => {
 
 export const getTree = async (csrf, id) => {
     try {
-        const response = await fetch(`http://api.ez-task.fr/api/tree/one/${id}`, {
+        const response = await fetch(`https://api.ez-task.fr/api/tree/one/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export const getTree = async (csrf, id) => {
 
 export const createTree = async (csrf, name, familyId) => {
     try {
-        const response = await fetch('http://api.ez-task.fr/api/tree/add', {
+        const response = await fetch('https://api.ez-task.fr/api/tree/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ export const createTree = async (csrf, name, familyId) => {
 
 export const deleteTree = async (csrf, id) => {
     try {
-        const response = await fetch(`http://api.ez-task.fr/api/tree/delete/${id}`, {
+        const response = await fetch(`https://api.ez-task.fr/api/tree/delete/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ export const deleteTree = async (csrf, id) => {
 
 export const updateTree = async (csrf, id, name) => {
     try {
-        const response = await fetch('http://api.ez-task.fr/api/tree/update', {
+        const response = await fetch('https://api.ez-task.fr/api/tree/update', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,6 +1,6 @@
 export const getAllTasks = async (csrf, id) => {
     try {
-        const response = await fetch(`http://api.ez-task.fr/api/task/${id}`, {
+        const response = await fetch(`https://api.ez-task.fr/api/task/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ export const getAllTasks = async (csrf, id) => {
 
 export const createTask = async (csrf, content, id) => {
     try {
-        const response = await fetch('http://api.ez-task.fr/api/task/add', {
+        const response = await fetch('https://api.ez-task.fr/api/task/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export const createTask = async (csrf, content, id) => {
 
 export const updateTask = async (csrf, id, content) => {
     try {
-        const response = await fetch('http://api.ez-task.fr/api/task/update', {
+        const response = await fetch('https://api.ez-task.fr/api/task/update', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export const updateTask = async (csrf, id, content) => {
 
 export const deleteTask = async (csrf, id) => {
     try {
-        const response = await fetch('http://api.ez-task.fr/api/task/delete', {
+        const response = await fetch('https://api.ez-task.fr/api/task/delete', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

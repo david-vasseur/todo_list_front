@@ -3,7 +3,7 @@
 export const fetchsign = async (values, csrf) => {
     const { email, password, name, firstName } = values;
     try {
-        const response = await fetch('http://api.ez-task.fr/api/users/sign', {
+        const response = await fetch('https://api.ez-task.fr/api/users/sign', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export const fetchLogin = async (values, csrf, dispatch) => {
     const { email, password } = values;
     
     try {
-        const response = await fetch('http://api.ez-task.fr/api/users/login', {
+        const response = await fetch('https://api.ez-task.fr/api/users/login', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export const fetchLogin = async (values, csrf, dispatch) => {
 
 export const getCsrf = async () => {
     try {
-        const response = await fetch('http://api.ez-task.fr/api/csrfToken', {
+        const response = await fetch('https://api.ez-task.fr/api/csrfToken', {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ export const getCsrf = async () => {
 }
 
 export const getUser = async (csrf, dispatch) => {
-    const response = await fetch('http://api.ez-task.fr/api/users/user', {
+    const response = await fetch('https://api.ez-task.fr/api/users/user', {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ export const getUser = async (csrf, dispatch) => {
 };
 
 export const getAllUsers = async (csrf, id) => {
-    const response = await fetch(`http://api.ez-task.fr/api/users/${id}`, {
+    const response = await fetch(`https://api.ez-task.fr/api/users/${id}`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ export const getAllUsers = async (csrf, id) => {
 };
 
 export const fetchLogout = async (csrf) => {
-    const response = await fetch(`http://api.ez-task.fr/api/users/logout`, {
+    const response = await fetch(`https://api.ez-task.fr/api/users/logout`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
