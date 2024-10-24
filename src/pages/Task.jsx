@@ -23,7 +23,7 @@ function List() {
     const [tasks, setTasks] = useState([]);
     const [isModified, setIsModified] = useState(null); 
     const [updateValue, setUpdateValue] = useState('');
-    
+
     useEffect(() => {
         const fetchList = async () => {
             const fetchedList = await getTree(csrf, id);
@@ -55,7 +55,6 @@ function List() {
         socket.off('taskAdded');
         socket.off('taskUpdated');
         socket.off('taskDeleted');
-        socket.disconnect();
       };
     }, [socket]);
 

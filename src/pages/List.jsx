@@ -35,7 +35,6 @@ function Todo() {
       socket.off('listAdded');
       socket.off('listUpdated');
       socket.off('listDeleted');
-      socket.disconnect();
     };
   }, [socket]);
   
