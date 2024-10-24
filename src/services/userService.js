@@ -73,12 +73,11 @@ export const getCsrf = async () => {
     } 
 }
 
-export const getUser = async (csrf, dispatch) => {
+export const getUser = async (dispatch) => {
     const response = await fetch('https://api.ez-task.fr/api/users/user', {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRF-Token': csrf
         },
         credentials: "include",
     });

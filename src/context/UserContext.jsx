@@ -1,7 +1,6 @@
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer, useRef, useState } from "react";
 import io from 'socket.io-client';
 import { getUser } from "../services/userService";
-import Cookies from "js-cookie";
 
 const UserContext = createContext(null);
 
@@ -68,34 +67,22 @@ const UserProvider = ({ children }) => {
     const [socket, setSocket] = useState(null);
 
     useEffect(() => {
+        const isFirstRender = useRef(true)
         const fetchAndReconnect = async () => {
-            console.log("useEffect exécuté");
-            console.log("isConnected:", state.isConnected);
-            console.log("Token:", Cookies.get('token'));
-
             if (!state.isConnected) {
-                console.log("tentative de connection")
-                const response = await fetch('https://api.ez-task.fr/api/users/reconnect', {
-                    method: "GET",
-                    credentials: "include" 
-                });
-    
-                if (response.ok) {
-                    const data = await response.json(); 
-                    const csrfToken = data.csrfToken; 
-                    console.log(csrfToken);
-                    
-                    await getUser(csrfToken, dispatch);
-                } else {
-                    console.error('Erreur lors de la reconnexion:');
-                }
+                await getUser(dispatch); 
             }
         };
-    
-        fetchAndReconnect(); 
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+        } else {
+            fetchAndReconnect();
+        }
+         
     }, [state.isConnected, dispatch]);
 
     useEffect(() => {
+        
         if (state.isConnected) {
             const newSocket = io('wss://api.ez-task.fr/', {
                 query: {

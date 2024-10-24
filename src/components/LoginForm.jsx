@@ -42,7 +42,7 @@ function LoginForm() {
         else {
             showModal(<FaSmile className="text-[#dbc049] text-[3rem]" />, `Bienvenue ${loginData.data.user.firstName}`);
             await setCsrf(loginData.data.csrfToken);
-            await getUser(loginData.data.csrfToken, dispatch);  
+            await getUser(dispatch);  
             navigate('/profile');
         }    
     };
