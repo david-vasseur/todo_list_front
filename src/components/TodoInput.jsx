@@ -7,7 +7,7 @@ import { createTree } from '../services/treeService';
 import { useModal } from '../context/ModalContext';
 import { SecurityContext } from '../context/SecurityContext';
 
-function TodoInput({ addList, addTask, id, familyId }) {
+function TodoInput({ id, familyId }) {
 
     const { showModal } = useModal();
     const { csrf } = useContext(SecurityContext);
@@ -25,11 +25,9 @@ function TodoInput({ addList, addTask, id, familyId }) {
     const handleSubmit = async (values, { resetForm }, initialValues) => {
         if (id) {
             const newTask = await createTask(csrf, values.input, id);
-            addTask(newTask.data);
             showModal('BRAVO', newTask.message)
         } else {
             const newList = await createTree(csrf, values.input, familyId);
-            addList(newList.data);
             showModal('BRAVO', newList.message)
         }
         resetForm({ values: initialValues });
