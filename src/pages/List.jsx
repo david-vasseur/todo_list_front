@@ -20,15 +20,15 @@ function Todo() {
   useEffect(() => {
       
     socket.on('listAdded', (newList) => {
-      setTasks(prevLists => [newList, ...prevLists]); 
+      setLists(prevLists => [newList, ...prevLists]); 
     });
 
     socket.on('listUpdated', (updatedList) => {
-      setTasks(prev => prev.map(list => (list.id === updatedList.id ? { ...list, name: updatedList.name } : list)));
+      setLists(prev => prev.map(list => (list.id === updatedList.id ? { ...list, name: updatedList.name } : list)));
     });
 
     socket.on('taskDeleted', (deletedList) => {
-      setTasks(prev => prev.filter(list => list.id !== deletedList.id));
+      setLists(prev => prev.filter(list => list.id !== deletedList.id));
     });
 
     return () => {
