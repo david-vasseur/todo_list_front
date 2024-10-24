@@ -83,7 +83,6 @@ export const getUser = async (csrf, dispatch) => {
         credentials: "include",
     });
     const data = await response.json();
-    console.log(data);
     dispatch({
         type: 'add family',
         payload: { family: data.family, familyId: data.familyId, hash: data.hash, isOwner: data.isOwner }

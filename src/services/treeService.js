@@ -26,7 +26,6 @@ export const getTree = async (csrf, id) => {
             credentials: "include",
         });
         const data = await response.json();
-        console.log(data.data);
         return data.data;
     } catch (error) {
         return { error: { message: error.message } };
