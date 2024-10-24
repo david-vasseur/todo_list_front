@@ -40,15 +40,15 @@ function App() {
         <Route path='*' element={<Navigate to="/" />} />
         <Route path="/" element={<Home />} />
         <Route path="/sign" element={<Sign />} />
-        {state.isConnected ? 
+        {state.isConnected ? (
         <>
           <Route path="/todo" element={<Todo />} />
           <Route path="/todo/:id" element={<List />} />
           <Route path="/profile" element={<Profile />} />
         </>
-         : 
-         <Navigate to="/" />
-         }
+        ) : ( 
+          <Navigate to="/" />
+        )}
       </Routes>
     </Router>
       </div>
