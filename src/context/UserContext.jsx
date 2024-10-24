@@ -69,6 +69,10 @@ const UserProvider = ({ children }) => {
 
     useEffect(() => {
         const fetchAndReconnect = async () => {
+            console.log("useEffect exécuté");
+            console.log("isConnected:", state.isConnected);
+            console.log("Token:", Cookies.get('token'));
+            
             if (!state.isConnected && Cookies.get('token')) {
                 console.log("tentative de connection")
                 const response = await fetch('https://api.ez-task.fr/api/users/reconnect', {
