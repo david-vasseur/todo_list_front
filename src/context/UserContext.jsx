@@ -70,7 +70,7 @@ const UserProvider = ({ children }) => {
     useEffect(() => {
         const fetchAndReconnect = async () => {
             if (!state.isConnected && Cookies.get('token')) {
-                const response = await fetch('https://api.ez-task.fr/reconnect', {
+                const response = await fetch('https://api.ez-task.fr/api/users/reconnect', {
                     method: "GET",
                     credentials: "include" 
                 });
