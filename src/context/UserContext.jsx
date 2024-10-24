@@ -70,6 +70,7 @@ const UserProvider = ({ children }) => {
     useEffect(() => {
         const fetchAndReconnect = async () => {
             if (!state.isConnected && Cookies.get('token')) {
+                console.log("tentative de connection")
                 const response = await fetch('https://api.ez-task.fr/api/users/reconnect', {
                     method: "GET",
                     credentials: "include" 
@@ -78,7 +79,8 @@ const UserProvider = ({ children }) => {
                 if (response.ok) {
                     const data = await response.json(); 
                     const csrfToken = data.csrfToken; 
-    
+                    console.log(csrfToken);
+                    
                     await getUser(csrfToken, dispatch);
                 } else {
                     console.error('Erreur lors de la reconnexion:');
