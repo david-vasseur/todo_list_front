@@ -7,28 +7,23 @@ import List from './pages/Task';
 import Profile from './pages/Profile';
 import Modal from './components/Modal';
 import NavBar from './components/NavBar';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect } from 'react';
 import { getUser } from './services/userService';
 import { UserContext } from './context/UserContext';
 
 function App() {
 
   const { state, dispatch } = useContext(UserContext);
-  const isFirstRender = useRef(true);
   useEffect(() => {
     
     const fetchAndReconnect = async () => {
         if (!state.isConnected) {
             await getUser(dispatch); 
         }
-    };
-    if (isFirstRender.current) {
-        isFirstRender.current = false;
-    } else {
         fetchAndReconnect();
     }
      
-  }, [state.isConnected, dispatch]);
+  }, [state.isConnected]);
 
   return (
     <div className="background-container">
