@@ -1,6 +1,5 @@
-import { createContext, useEffect, useReducer, useRef, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import io from 'socket.io-client';
-import { getUser } from "../services/userService";
 
 const UserContext = createContext(null);
 
@@ -66,20 +65,7 @@ const UserProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const [socket, setSocket] = useState(null);
 
-    useEffect(() => {
-        const isFirstRender = useRef(true)
-        const fetchAndReconnect = async () => {
-            if (!state.isConnected) {
-                await getUser(dispatch); 
-            }
-        };
-        if (isFirstRender.current) {
-            isFirstRender.current = false;
-        } else {
-            fetchAndReconnect();
-        }
-         
-    }, [state.isConnected, dispatch]);
+
 
     useEffect(() => {
         
