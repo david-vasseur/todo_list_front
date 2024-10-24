@@ -33,23 +33,16 @@ function LoginForm() {
             .matches(/[A-Z]/, "Le mot de passe doit contenir au moins une majuscule"),
     })
 
-    const handleSubmit = async (values) => {
-        const csrf = await getCsrf();
-        console.log('Premier token csrf:', csrf);
-        
-        await setCsrf(csrf);        
-        const loginData = await fetchLogin(values, csrf, dispatch);
+    const handleSubmit = async (values) => {      
+        const loginData = await fetchLogin(values, await getCsrf(), dispatch);
         
         if (!loginData.success) {
             showModal(<TfiAlert className="text-[red] text-[3rem]" />, loginData.error.message);
         }
         else {
             showModal(<FaSmile className="text-[#dbc049] text-[3rem]" />, `Bienvenue ${loginData.data.user.firstName}`);
-            const newCsrf = loginData.data.csrfToken;
-            console.log('deuxieme token csrf:', newCsrf);
-            
-            await setCsrf(newCsrf);
-            await getUser(newCsrf, dispatch);  
+            await setCsrf(loginData.data.csrfToken);
+            await getUser(loginData.data.csrfToken, dispatch);  
             navigate('/profile');
         }    
     };
