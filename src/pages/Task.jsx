@@ -9,9 +9,11 @@ import { FaPlusCircle } from 'react-icons/fa'
 import io from 'socket.io-client';
 import BackButton from '../components/BackButton'
 import { SecurityContext } from '../context/SecurityContext'
+import { UserContext } from '../context/UserContext'
 
 function List() {
 
+    const { socket } = useContext(UserContext);
     const { csrf } = useContext(SecurityContext);
     const { showModal } = useModal();
     const params = useParams();
@@ -22,8 +24,6 @@ function List() {
     const [isModified, setIsModified] = useState(null); 
     const [updateValue, setUpdateValue] = useState('');
     
-    const socket = io('wss://api.ez-task.fr/');
-
     useEffect(() => {
         const fetchList = async () => {
             const fetchedList = await getTree(csrf, id);

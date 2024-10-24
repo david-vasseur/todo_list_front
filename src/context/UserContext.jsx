@@ -76,11 +76,11 @@ const UserProvider = ({ children }) => {
             setSocket(newSocket); 
 
             newSocket.on('connect', () => {
-                console.log('Connecté au serveur Socket.IO');
+                console.log(`l'utilisateur ${state.firstName} vient de se connecter`);
             });
 
             newSocket.on('disconnect', () => {
-                console.log('Déconnecté du serveur Socket.IO');
+                console.log(`l'utilisateur ${state.firstName} vient de se déconnecter`);
             });
 
             

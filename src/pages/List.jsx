@@ -11,15 +11,11 @@ function Todo() {
 
   const { csrf } = useContext(SecurityContext);
   const { showModal } = useModal();
-  const { state } = useContext(UserContext);
+  const { state, socket } = useContext(UserContext);
   const [add, setAdd] = useState(true);
-  console.log(state);
   const [lists, setLists] = useState([]);
   const [isModified, setIsModified] = useState();  
   const [updateValue, setUpdateValue] = useState('');
-  console.log(updateValue);
-  
-  const socket = io('wss://api.ez-task.fr/');
 
   useEffect(() => {
       
@@ -55,9 +51,6 @@ function Todo() {
     fetchTrees();
   }, [state.familyId]);
 
-  const addList = (newList) => {
-    setLists(prev => [newList, ...prev]);
-  }
 
   const handleDelete = async (id) => {
     const deletedList = await deleteTree(csrf, id);
@@ -78,7 +71,7 @@ function Todo() {
           <div className="flex gap-5 relative">
               {!add && (
                 <div className="absolute scale-[0.8] sm:scale-[1] -translate-x-[60%] transition-all duration-300">
-                  <TodoInput familyId={state.familyId} addList={addList} />
+                  <TodoInput familyId={state.familyId} />
                 </div>
               )}
               <FaPlusCircle 
