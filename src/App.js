@@ -22,7 +22,7 @@ function App() {
         const newFetch = await getUser(dispatch);
         console.log(newFetch);
   
-        if (newFetch.message === 'Accès non autorisé') {
+        if (newFetch.message) {
           return; 
         } else {
           console.log("le else est joué");
