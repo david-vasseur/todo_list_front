@@ -22,12 +22,14 @@ function App() {
         if (state.isConnected === false) {
             const newFetch = await getUser(dispatch); 
             console.log(newFetch);
-            if (newFetch) {
+            if (newFetch.message === 'Accès non authorisé') {
+              return
+              }
+            } else {
               dispatch({
                 type:'add user',
                 payload: { name: newFetch.name, firstName: newFetch.firstName, email: newFetch.email }
-              })
-            }            
+            })           
         }
     }
     fetchAndReconnect();
