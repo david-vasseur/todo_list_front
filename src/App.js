@@ -21,7 +21,13 @@ function App() {
     const fetchAndReconnect = async () => {
         if (state.isConnected === false) {
             const newFetch = await getUser(dispatch); 
-            console.log(newFetch);            
+            console.log(newFetch);
+            if (newFetch) {
+              dispatch({
+                type:'add user',
+                payload: { name: newFetch.name, firstName: newFetch.firstName, email: newFetch.email }
+              })
+            }            
         }
     }
     fetchAndReconnect();
