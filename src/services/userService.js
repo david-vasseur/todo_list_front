@@ -92,8 +92,17 @@ export const getUser = async (dispatch) => {
     });
     const data = await response.json();
     dispatch({
-        type: 'add family',
-        payload: { family: data.family, familyId: data.familyId, hash: data.hash, isOwner: data.isOwner }
+        type: 'add user',
+        payload: {
+            id: data.user.id,
+            name: data.user.name,
+            firstName: data.user.firstName,
+            email: data.user.email,
+            family: data.user.family.name,  
+            familyId: data.user.familyId, 
+            hash: data.user.family.hash, 
+            isOwner: data.user.family.isOwner 
+        }
     })
     return data
 };
