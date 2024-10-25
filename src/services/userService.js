@@ -96,6 +96,7 @@ export const getUser = async (dispatch) => {
     dispatch({
         type: 'add user',
         payload: {
+            isConnected: true,
             id: data.user.id,
             name: data.user.name,
             firstName: data.user.firstName,

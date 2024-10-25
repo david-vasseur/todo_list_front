@@ -18,7 +18,11 @@ function Todo() {
   const [updateValue, setUpdateValue] = useState('');
 
   useEffect(() => {
-      
+    
+    if (!socket) {
+      return;
+    }
+
     socket.on('listAdded', (newList) => {
       setLists(prevLists => [newList, ...prevLists]); 
     });
