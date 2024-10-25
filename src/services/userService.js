@@ -43,7 +43,16 @@ export const fetchLogin = async (values, csrf, dispatch) => {
         const data = await response.json();
         dispatch({
             type: 'add user',
-            payload: data.user
+            payload: {
+                id: loginData.data.user.id,
+                name: loginData.data.user.name,
+                firstName: loginData.data.user.firstName,
+                email: loginData.data.user.email,
+                family: loginData.data.user.family.name,  
+                familyId: loginData.data.user.familyId, 
+                hash: loginData.data.user.family.hash, 
+                isOwner: loginData.data.user.family.isOwner 
+            }
         })
         return {
             success: response.ok,
