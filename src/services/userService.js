@@ -91,6 +91,8 @@ export const getUser = async (dispatch) => {
         credentials: "include",
     });
     const data = await response.json();
+    console.log(data);
+    
     dispatch({
         type: 'add user',
         payload: {
