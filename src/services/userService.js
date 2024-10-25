@@ -96,14 +96,14 @@ export const getUser = async (dispatch) => {
     dispatch({
         type: 'add user',
         payload: {
-            id: data.id,
-            name: data.name,
-            firstName: data.firstName,
-            email: data.email,
-            family: data.family.name,  
-            familyId: data.familyId, 
-            hash: data.family.hash, 
-            isOwner: data.family.isOwner 
+            id: data.user.id,
+            name: data.user.name,
+            firstName: data.user.firstName,
+            email: data.user.email,
+            family: data.user.family.name,  
+            familyId: data.user.familyId, 
+            hash: data.user.family.hash, 
+            isOwner: data.user.family.isOwner 
         }
     })
     return data

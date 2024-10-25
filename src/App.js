@@ -10,9 +10,11 @@ import NavBar from './components/NavBar';
 import { useContext, useEffect } from 'react';
 import { getUser } from './services/userService';
 import { UserContext } from './context/UserContext';
+import { SecurityContext } from './context/SecurityContext';
 
 function App() {
 
+  const { setCsrf } = useContext(SecurityContext);
   const { state, dispatch } = useContext(UserContext);
   console.log("eat du state User:", state.isConnected, state.firstName);
   
@@ -25,12 +27,8 @@ function App() {
         if (newFetch.message) {
           return; 
         } else {
-          console.log("le else est joué");
-          
-          dispatch({
-            type: 'add user',
-            payload: { name: newFetch.name, firstName: newFetch.firstName, email: newFetch.email }
-          });
+          console.log(newFetch.token);          
+          setCsrf(newFetch.token)
         }
       }
     };
