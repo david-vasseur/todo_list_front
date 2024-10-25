@@ -20,8 +20,10 @@ function App() {
     
     const fetchAndReconnect = async () => {
         if (state.isConnected === false) {
-            await getUser(dispatch); 
+            const newFetch = await getUser(dispatch); 
+            console.log(newFetch);            
         }
+      
         fetchAndReconnect();
     }
      
