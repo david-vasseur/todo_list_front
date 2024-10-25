@@ -25,6 +25,8 @@ function App() {
         if (newFetch.message === 'Accès non autorisé') {
           return; 
         } else {
+          console.log("le else est joué");
+          
           dispatch({
             type: 'add user',
             payload: { name: newFetch.name, firstName: newFetch.firstName, email: newFetch.email }
