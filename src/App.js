@@ -14,12 +14,12 @@ import { UserContext } from './context/UserContext';
 function App() {
 
   const { state, dispatch } = useContext(UserContext);
-  console.log(state.isConnected, state.firstName);
+  console.log("eat du state User:", state.isConnected, state.firstName);
   
   useEffect(() => {
     
     const fetchAndReconnect = async () => {
-        if (!state.isConnected) {
+        if (state.isConnected === false) {
             await getUser(dispatch); 
         }
         fetchAndReconnect();
