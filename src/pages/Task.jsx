@@ -38,6 +38,10 @@ function List() {
     }, [id]);
 
     useEffect(() => {
+
+      if (!socket) {
+        return;
+      }
       
       socket.on('taskAdded', (newTask) => {
         setTasks(prevTasks => [newTask, ...prevTasks]); 
