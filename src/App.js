@@ -23,10 +23,8 @@ function App() {
             const newFetch = await getUser(dispatch); 
             console.log(newFetch);            
         }
-      
-        fetchAndReconnect();
     }
-     
+    fetchAndReconnect();
   }, [state.isConnected]);
 
   return (
