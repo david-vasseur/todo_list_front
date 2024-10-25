@@ -16,14 +16,15 @@ function App() {
 
   const { setCsrf } = useContext(SecurityContext);
   const { state, dispatch } = useContext(UserContext);
-  console.log("eat du state User:", state.isConnected, state.firstName);
+  console.log("etat du state User:", state.isConnected, state.firstName);
   
   useEffect(() => {
     const fetchAndReconnect = async () => {
       if (state.isConnected === false) {
         const newFetch = await getUser(dispatch);
         console.log(newFetch);
-  
+        console.log('state lors de la reconnexion :', state);
+        
         if (newFetch.message) {
           return; 
         } else {
