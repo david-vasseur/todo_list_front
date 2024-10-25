@@ -44,14 +44,14 @@ export const fetchLogin = async (values, csrf, dispatch) => {
         dispatch({
             type: 'add user',
             payload: {
-                id: loginData.data.user.id,
-                name: loginData.data.user.name,
-                firstName: loginData.data.user.firstName,
-                email: loginData.data.user.email,
-                family: loginData.data.user.family.name,  
-                familyId: loginData.data.user.familyId, 
-                hash: loginData.data.user.family.hash, 
-                isOwner: loginData.data.user.family.isOwner 
+                id: data.user.id,
+                name: data.user.name,
+                firstName: data.user.firstName,
+                email: data.user.email,
+                family: data.user.family.name,  
+                familyId: data.user.familyId, 
+                hash: data.user.family.hash, 
+                isOwner: data.user.family.isOwner 
             }
         })
         return {
