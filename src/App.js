@@ -17,23 +17,24 @@ function App() {
   console.log("eat du state User:", state.isConnected, state.firstName);
   
   useEffect(() => {
-    
     const fetchAndReconnect = async () => {
-        if (state.isConnected === false) {
-            const newFetch = await getUser(dispatch); 
-            console.log(newFetch);
-            if (newFetch.message === 'Accès non authorisé') {
-              return
-              }
-            } else {
-              dispatch({
-                type:'add user',
-                payload: { name: newFetch.name, firstName: newFetch.firstName, email: newFetch.email }
-            })           
+      if (state.isConnected === false) {
+        const newFetch = await getUser(dispatch);
+        console.log(newFetch);
+  
+        if (newFetch.message === 'Accès non autorisé') {
+          return; 
+        } else {
+          dispatch({
+            type: 'add user',
+            payload: { name: newFetch.name, firstName: newFetch.firstName, email: newFetch.email }
+          });
         }
-    }
+      }
+    };
     fetchAndReconnect();
-  }, [state.isConnected]);
+  }, [state.isConnected, dispatch]);
+  
 
   return (
     <div className="background-container">
