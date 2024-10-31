@@ -3,7 +3,7 @@ import { FaCheck, FaPencil } from 'react-icons/fa6';
 import { TfiClose } from 'react-icons/tfi';
 import { Link } from 'react-router-dom';
 
-function Card({ item, onDelete, onUpdate, isModified, setIsModified, updateValue, setUpdateValue, handleDone, done }) {
+function Card({ item, onDelete, onUpdate, isModified, setIsModified, updateValue, setUpdateValue }) {
     const toLink = (item) => {
         if (item.name) {
             return `/todo/${item.id}`;
@@ -22,7 +22,7 @@ function Card({ item, onDelete, onUpdate, isModified, setIsModified, updateValue
     }
 
   return (
-    <Link to={toLink(item)} onClick={(e) => {e.preventDefault(); if (typeof handleDone === "function") {handleDone(item.id)}}} className={`pl-4 pr-4 p-2 ${done && done.includes(item.id) ? 'bg-blue-500' : 'bg-[#8e05c2]'} text-[#dbd8e3] rounded-3xl w-[80vw] md:w-[60vw] lg:w-[30vw] font-extrabold border-2 border-slate-900 flex gap-12 justify-between transition-transform duration-300 ease-in-out items-center shadow-md shadow-black sm:hover:translate-x-2 will-change-transform`}>
+    <Link to={toLink(item)} className={`pl-4 pr-4 p-2 bg-[#8e05c2] text-[#dbd8e3] rounded-3xl w-[80vw] md:w-[60vw] lg:w-[30vw] font-extrabold border-2 border-slate-900 flex gap-12 justify-between transition-transform duration-300 ease-in-out items-center shadow-md shadow-black sm:hover:translate-x-2 will-change-transform`}>
       {isModified === item.id ? (
         <div className="flex gap-2 justify-between w-[100%]">
             <input
