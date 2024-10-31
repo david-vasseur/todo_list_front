@@ -21,6 +21,7 @@ function List() {
     const [add, setAdd] = useState(true);
     const [list, setList] = useState([]);
     const [tasks, setTasks] = useState([]);
+    const [done, setDone] = useState([]);
     const [isModified, setIsModified] = useState(null); 
     const [updateValue, setUpdateValue] = useState('');
 
@@ -73,6 +74,29 @@ function List() {
         showModal('', updatedTask.message);
       };
 
+      // FONCTION DONE TEMPORAIRE AVEC LOCALSTORAGE //
+
+      useEffect(() => {
+
+        const existingDone = localStorage.getItem('liste');
+        if (existingDone) {
+          setDone(JSON.parse(existingDone))
+        }
+
+      }, [])
+
+      const handleDone = (taskId) => {
+        setDone((prevDone) => {
+          if (!prevDone.includes(taskId)) {
+            const newDoneTask = [...prevDone, taskId];
+            localStorage.setItem("liste", JSON.stringify(newDoneTask));
+            return newDoneTask;
+          } else {
+            return prevDone
+          }
+        });
+      }
+
   return (
     <div className="mt-28">
         <div className="flex gap-10 justify-between items-center w-[50vw] ml-5">
@@ -93,7 +117,7 @@ function List() {
             </div>
             <div className="flex flex-col gap-5 mt-20 mb-20">
                 {tasks.map(task => (
-                <Card key={task.id} item={task} setIsModified={setIsModified} isModified={isModified} onDelete={handleDelete} onUpdate={handleUpdate} updateValue={updateValue} setUpdateValue={setUpdateValue} />
+                <Card key={task.id} item={task} setIsModified={setIsModified} isModified={isModified} onDelete={handleDelete} onUpdate={handleUpdate} updateValue={updateValue} setUpdateValue={setUpdateValue} handleDone={handleDone} done={done} />
                 ))}
             </div>
           </div>
