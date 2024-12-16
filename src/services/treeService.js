@@ -64,6 +64,8 @@ export const deleteTree = async (csrf, id) => {
             credentials: 'include'
         });
         const data = await response.json();
+        console.log("réponse de la suppréssion :", data);
+        
         return data;
     } catch (error) {
         return { error: { message: error.message } };
