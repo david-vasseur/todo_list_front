@@ -71,6 +71,7 @@ export const deleteTask = async (csrf, id) => {
             })
         });
         const data = await response.json();
+        console.log("tache supprimée:", data)
         return data;
     } catch (error) {
         return { error: { message: error.message } };
