@@ -31,7 +31,7 @@ function Todo() {
       setLists(prev => prev.map(list => (list.id === updatedList.id ? { ...list, name: updatedList.name } : list)));
     });
 
-    socket.on('taskDeleted', (deletedList) => {
+    socket.on('listDeleted', (deletedList) => {
       setLists(prev => prev.filter(list => list.id !== deletedList.id));
     });
 
